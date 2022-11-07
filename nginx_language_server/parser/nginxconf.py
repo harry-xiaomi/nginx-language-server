@@ -43,7 +43,7 @@ def convert(code: str) -> ParsedSymbols:
     try:
         with NamedTemporaryFile(mode="w", delete=False) as nginx:
             nginx.write(code)
-        parsed = crossplane.parse(nginx.name)["config"][0]["parsed"]
+        parsed = crossplane.parse(nginx.name, single=True, check_ctx=False)["config"][0]["parsed"]
         result: ParsedSymbols = {}
         _convert(result, parsed, [])
         return result
